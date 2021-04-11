@@ -1,7 +1,7 @@
 import os, json, util
 from flask import Flask, request, render_template, redirect
-from flask_sqlalchemy import flask_SQLAlchemy
-from flask_sqlalchemy import and_, func
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_, func
 
 # get current app directory
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -17,8 +17,13 @@ def index():
 
 # Sends users to about page upon load
 @app.route('/about')
-def index():
+def about():
     return render_template('about.html')
+
+# Sends users to game page upon load
+@app.route('/game')
+def game():
+    return render_template('game.html')
 
 
 if __name__ == '__main__':
