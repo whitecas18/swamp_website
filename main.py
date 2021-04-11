@@ -1,4 +1,4 @@
-import os, json
+import os, json, util
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import flask_SQLAlchemy
 from flask_sqlalchemy import and_, func
@@ -16,7 +16,7 @@ def index():
     return render_template('index.html')
 
 # Sends users to about page upon load
-@app.route('/')
+@app.route('/about')
 def index():
     return render_template('about.html')
 
