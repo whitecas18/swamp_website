@@ -1,1 +1,81 @@
-game
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Swamp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../swamp.css" />
+    <link href="../assets/favicon.png" rel="icon" />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../scripts/game.js"></script>
+    <style></style>
+  </head>
+
+  <body id="gamebody">
+    <div class="container">
+      <div id="gamecontent" class="row">
+        <div id="helpbutton">
+          <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#helpDialog">Help</button>
+        </div>
+        <div class="square col">
+          <div class="content">
+            <div class="row" style="height: 45vh">
+              <div id="output"><span>Hoggard challenges you to a duel of wits.</span><br /></div>
+            </div>
+            <div id="inputarea" class="row border-top border-alert">
+              <span class="w-100">><input id="cmd" type="text" placeholder="enter a command..." /> </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="helpDialog" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title">Game help</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h4>List of supported commands</h4>
+              <ul>
+                <li>go *location*</li>
+                <li>get *object*</li>
+                <li>answer *choice*</li>
+                <li>leave</li>
+                <li>look</li>
+                <li>inventory</li>
+                <li>talk *person*</li>
+                <li>use *object*</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

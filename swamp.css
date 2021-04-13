@@ -1,0 +1,36 @@
+#gamebody {
+  color: white;
+  font-size: large;
+  background-color: black;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#gamecontent {
+  background-color: #282828;
+}
+
+#output {
+  margin-top: auto;
+  overflow: hidden;
+  position: relative;
+  padding-left: 1%;
+}
+
+#cmd {
+  background: transparent !important;
+  border: 0;
+  color: white;
+  width: 90%;
+  outline: none;
+}
+
+#helpbutton {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 1;
+}
+
+.modal {
+  color: black;
+}
