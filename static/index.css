@@ -1,0 +1,23 @@
+body {
+  background-color: black;
+}
+
+span {
+  font-size: 60px;
+  font-family: "Bleeding Pixels";
+}
+
+.btn {
+  width: 600px;
+  border-radius: 0 !important;
+}
+
+@font-face {
+  font-family: "Alpha Mutation";
+  src: url("../static/Alpha Mutation.ttf");
+}
+
+@font-face {
+  font-family: "Bleeding Pixels";
+  src: url("../static/BleedingPixels.ttf");
+}

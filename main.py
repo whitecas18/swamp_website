@@ -13,7 +13,7 @@ app = Flask(__name__)
 # Sends users to index page upon load
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 # Sends users to about page upon load
 @app.route('/about')
