@@ -2,6 +2,7 @@ body {
   background-color: black;
   font-size: large;
   font-family: "Courier New", Courier, monospace;
+  margin-bottom: 10px;
 }
 
 img {
@@ -15,4 +16,12 @@ img {
 
 span {
   float: right;
+  color: green;
+}
+
+table,
+tbody,
+td {
+  border: 1px solid white;
+  padding: 4px;
 }

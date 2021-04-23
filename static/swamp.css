@@ -48,3 +48,32 @@
 .modal {
   color: black;
 }
+
+@media only screen and (max-width: 700px) {
+  #output {
+    font-size: x-small;
+  }
+  #savebutton {
+    position: absolute;
+    top: unset;
+    bottom: 2px;
+    right: 2px;
+    z-index: 1;
+  }
+
+  #helpbutton {
+    position: absolute;
+    top: unset;
+    bottom: 35px;
+    right: 2px;
+    z-index: 1;
+  }
+
+  #backbutton {
+    position: absolute;
+    top: unset;
+    bottom: 2px;
+    left: 2px;
+    z-index: 1;
+  }
+}

@@ -8,8 +8,13 @@ span {
 }
 
 .btn {
-  width: 600px;
+  width: 100%;
   border-radius: 0 !important;
+}
+
+.bdiv {
+  width: 60%;
+  min-width: 300px;
 }
 
 @font-face {
