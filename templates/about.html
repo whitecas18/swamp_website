@@ -1,1 +1,108 @@
-about
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>The Swamp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/about.css" />
+    <link href="../static/assets/favicon.png" rel="icon" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10 col-12 text-light text-lg">
+          <div class="mt-1 d-flex justify-content-between">
+            <h2>About The Swamp</h2>
+            <button id="back" class="m-1 btn btn-sm btn-light">back</button>
+          </div>
+          <p>
+            The Swamp is a browser-based text adventure. Travel through East Carolina University now warped into an unforgiving swamp land
+            by a mysterious curse. The other students may be gone, but the presence of the Old Ones still remains, and they are the key to
+            undoing the curse. Overcoming the trials of the Old Ones will grant you Crystals of their great knowledge, and collecting all 6
+            will give you the best chance at survival.
+          </p>
+          <img src="../static/assets/crystals.png" />
+          <p>Armed with only your wisdom and courage, traverse the land and free the campus or become another soul lost to The Swamp.</p>
+          <h2>Playing the game</h2>
+          <p>All interaction with the game is based on text inputs. There is a limited lis of verbs for both your sake and ours!</p>
+          <table>
+            <tbody>
+              <tr>
+                <td>go &nbsp;<span>&ltlocation&gt</span></td>
+                <td>&emsp;move in a direction (north, south, east, west)</td>
+              </tr>
+              <tr>
+                <td>get &nbsp;<span>&ltitem&gt</span></td>
+                <td>&emsp;pick up an item, if possible</td>
+              </tr>
+              <tr>
+                <td>use &nbsp;<span>&ltobject&gt</span></td>
+                <td>&emsp;use an object, if present in location or inventory</td>
+              </tr>
+              <tr>
+                <td>talk &nbsp;<span>&ltperson&gt</span></td>
+                <td>&emsp;talk to the specified person, if present</td>
+              </tr>
+              <tr>
+                <td>answer &nbsp;<span>&ltchoice&gt</span></td>
+                <td>&emsp;select an answer when prompted with a question</td>
+              </tr>
+              <tr>
+                <td>inventory</td>
+                <td>&emsp;display items in your possession</td>
+              </tr>
+              <tr>
+                <td>leave</td>
+                <td>&emsp;leave your current location</td>
+              </tr>
+            </tbody>
+          </table>
+          <h2 class="mt-3">About the Team</h2>
+          <table>
+            <tbody>
+              <tr>
+                <td>Cason White &nbsp;&emsp;</td>
+                <td>github: <a href="https://github.com/whitecas18">https://github.com/whitecas18</a></td>
+              </tr>
+              <tr>
+                <td>Malik Brantley &nbsp;&emsp;</td>
+                <td>github: <a href="https://github.com/brantleym13">https://github.com/brantleym13</a></td>
+              </tr>
+              <tr>
+                <td>Robert Saul &nbsp;&emsp;</td>
+                <td>github: <a href="https://github.com/rowaul">https://github.com/rowaul</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(back).on("click", function () {
+        window.location.href = "/"
+      })
+    </script>
+  </body>
+</html>

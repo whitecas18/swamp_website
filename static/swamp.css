@@ -24,11 +24,24 @@
   width: 90%;
   outline: none;
 }
-
-#helpbutton {
+#savebutton {
   position: absolute;
   top: 2px;
   right: 2px;
+  z-index: 1;
+}
+
+#helpbutton {
+  position: absolute;
+  top: 35px;
+  right: 2px;
+  z-index: 1;
+}
+
+#backbutton {
+  position: absolute;
+  top: 2px;
+  left: 2px;
   z-index: 1;
 }
 

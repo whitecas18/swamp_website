@@ -34,8 +34,14 @@
   <body id="gamebody">
     <div class="container">
       <div id="gamecontent" class="row">
+        <div id="savebutton">
+          <button id="save" type="button" class="btn btn-light btn-sm">save</button>
+        </div>
+        <div id="backbutton">
+          <button id="back" type="button" class="btn btn-light btn-sm">back</button>
+        </div>
         <div id="helpbutton">
-          <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#helpDialog">Help</button>
+          <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#helpDialog">help</button>
         </div>
         <div class="square col">
           <div class="content">
@@ -78,13 +84,12 @@
               <h4>List of supported commands</h4>
               <ul>
                 <li>go *location*</li>
-                <li>get *object*</li>
-                <li>answer *choice*</li>
-                <li>leave</li>
-                <li>look</li>
-                <li>inventory</li>
-                <li>talk *person*</li>
+                <li>get *item*</li>
                 <li>use *object*</li>
+                <li>talk *person*</li>
+                <li>answer *choice*</li>
+                <li>inventory</li>
+                <li>leave</li>
               </ul>
             </div>
             <div class="modal-footer">
@@ -94,5 +99,13 @@
         </div>
       </div>
     </div>
+    <script>
+      $(back).on("click", function () {
+        window.location.href = "/"
+      })
+      $(save).on("click", function () {
+        window.alert("no save feature yet")
+      })
+    </script>
   </body>
 </html>
