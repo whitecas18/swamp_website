@@ -3,11 +3,73 @@ $(document).ready(function () {
   var output = document.getElementById("output")
   var audio = document.createElement("audio")
 
+  var gameState = {
+    inventory: {
+      candyBar: 0,
+      ronnieCrystal: 0,
+      dingCrystal: 0,
+      hogCrystal: 0,
+      gopalCrystal: 0,
+      wuCrystal: 0,
+      hillsCrystal: 0,
+    },
+    currentLocation: "austinstart",
+    currentSong: "startsong",
+    outputText: "",
+  }
+
+  // Button functions for html
+  $(back).on("click", function () {
+    window.location.href = "/"
+  })
+  $(saveSend).on("click", function () {
+    if (userNameInput.value == "") window.alert("Name cannot be blank!")
+    else {
+      tmpString = $("#output").find("span").last()[0].outerText
+      gameState.outputText = tmpString.substring(0, tmpString.length - 2)
+      save($("#userNameInput").val())
+    }
+  })
+
+  // As it says, this function sends your game state to the server to be saved!
+  function save(userName) {
+    console.log(gameState)
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(gameState),
+      dataType: "json",
+      url: "/game/save/" + userName,
+      success: function (e) {
+        console.log(e)
+        window.alert(e.responseText)
+      },
+      error: function (error) {
+        console.log(error)
+        window.alert(error.responseText)
+      },
+    })
+  }
+
+  function load(userName) {
+    $.ajax({
+      type: "GET",
+      url: "/game/load/" + userName,
+      success: function (e) {
+        console.log(e)
+        window.alert(e)
+      },
+      error: function (error) {
+        console.log(error)
+        window.alert("an error was encountered while attempting to load")
+      },
+    })
+  }
+
   // When the enter key is pressed, text from the command box is sent to the server
   // and printed to the game's output box.
   $("#cmd").on("keyup", function (event) {
-    if (event.keyCode === 13) {
-      playAudio(0)
+    if (event.keyCode === 13 && input.value != "") {
       console.log(input.value)
       textBuilder("You " + input.value, "color:#1E9C00;")
       input.value = ""
@@ -15,8 +77,8 @@ $(document).ready(function () {
   })
 
   // Plays selected audio file
-  // OPTIONS: togarbage1 - togarbage6,
-  //          leaveend, chocoend, goodend, badend, karlboss
+  // OPTIONS: togarbage1 - togarbage6, leaveend, chocoend,
+  //          goodend, badend, karlboss, overworld, startsong
   function playAudio(audName) {
     audio.pause()
     audio.setAttribute("src", "static/audio/" + audName + ".mp3")
@@ -70,9 +132,5 @@ $(document).ready(function () {
 
   // Sets initial values for a new game.
   $("#bgarea").css("background-image", "url(static/assets/bg-aus-208.png)")
-  playAudio("chocoend")
-  startText =
-    "You are jolted awake by the feeling of unrest. How long were you asleep? In Front of you is a computer monitor, on but displaying only a blue screen. All the other monitors are in the same state. You realize you’re in Austin 208, but there’s something wrong. Not just with the computer’s, but with the very grounds of campus. The air is tainted, almost palatable in its stench. The windows are almost blocked by overgrown vines and moss, and the sky has turned a permanent gray, the sun nowhere in sight. It’s as if all of ECU campus had become a swamp. Humid, dark, and uninhabited."
-  $("#output").append("<span>")
-  textBuilder(startText, "")
+  load("sda")
 })

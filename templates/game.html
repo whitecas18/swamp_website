@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="static/swamp.css" />
     <link href="static/assets/favicon.png" rel="icon" />
     <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
     <script
@@ -35,7 +35,7 @@
     <div class="container">
       <div id="gamecontent" class="row">
         <div id="savebutton">
-          <button id="save" type="button" class="btn btn-light btn-sm">save</button>
+          <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#saveDialog">save</button>
         </div>
         <div id="backbutton">
           <button id="back" type="button" class="btn btn-light btn-sm">back</button>
@@ -65,15 +65,31 @@
             </div>
             <div class="modal-body">
               <h4>List of supported commands</h4>
-              <ul>
-                <li>go *location*</li>
-                <li>get *item*</li>
-                <li>use *object*</li>
-                <li>talk *person*</li>
-                <li>answer *choice*</li>
-                <li>inventory</li>
-                <li>leave</li>
-              </ul>
+              <table>
+                <tbody>
+                  <tr>
+                    <td>go &emsp;<span>&ltlocation&gt</span></td>
+                  </tr>
+                  <tr>
+                    <td>get &emsp;<span>&ltitem&gt</span></td>
+                  </tr>
+                  <tr>
+                    <td>use &emsp;<span>&ltobject&gt</span></td>
+                  </tr>
+                  <tr>
+                    <td>talk &emsp;<span>&ltperson&gt</span></td>
+                  </tr>
+                  <tr>
+                    <td>answer &emsp;<span>&ltchoice&gt</span></td>
+                  </tr>
+                  <tr>
+                    <td>inventory</td>
+                  </tr>
+                  <tr>
+                    <td>leave</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -81,14 +97,29 @@
           </div>
         </div>
       </div>
+      <div class="modal fade" id="saveDialog" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title">Save your progress</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="userNameInput">Username: </label>
+                  <input type="text" class="form-control" id="userNameInput" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary mt-2" id="saveSend">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <script>
-      $(back).on("click", function () {
-        window.location.href = "/"
-      })
-      $(save).on("click", function () {
-        window.alert("no save feature yet")
-      })
-    </script>
   </body>
 </html>
