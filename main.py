@@ -39,19 +39,30 @@ def about():
 def game():
     return render_template('game.html')
 
-# Receives JSON object with game state 
-# DOES NOT MAKE CHANGES TO DB AT THIS POINT!
+# Receives JSON object with game state (needs a set username!)
+# If name already exists, old one is deleted. Sad!
 @app.route('/game/save/<userName>', methods=['POST'])
 def save(userName):
     stateJSON = request.get_json()
     print(stateJSON)
+    newSave = Saves(name=userName,json=json.dumps(stateJSON))
+    if (Saves.query.filter(Saves.name == userName).count() > 0):
+        print("old name")
+        db.session.delete(Saves.query.filter(Saves.name == userName).first())
+        db.session.add(newSave)
+        db.session.commit()
+    else:
+        print("new name")
+        db.session.add(newSave)
+        db.session.commit()
     
-    return "no saving yet"
+    return "Success!"
 
 # Returns JSON object associated with given username
 # If name is not found, returns a string "failure"
 @app.route('/game/load/<userName>', methods=['GET'])
 def load(userName):
+    print(userName)
     if(Saves.query.filter(Saves.name == userName).count() > 0):
         return Saves.query.filter(Saves.name == userName).first().json
     else:

@@ -3,9 +3,11 @@ $(document).ready(function () {
   var output = document.getElementById("output")
   var audio = document.createElement("audio")
 
+  // Sets initial values for a new game.
+  $("#bgarea").css("background-image", "url(static/assets/bg-aus-208.png)")
   var gameState = {
     inventory: {
-      candyBar: 0,
+      candyBar: 1,
       ronnieCrystal: 0,
       dingCrystal: 0,
       hogCrystal: 0,
@@ -35,33 +37,29 @@ $(document).ready(function () {
   function save(userName) {
     console.log(gameState)
     $.ajax({
+      async: false,
       type: "POST",
       contentType: "application/json",
       data: JSON.stringify(gameState),
       dataType: "json",
       url: "/game/save/" + userName,
-      success: function (e) {
+      complete: function (e) {
         console.log(e)
         window.alert(e.responseText)
-      },
-      error: function (error) {
-        console.log(error)
-        window.alert(error.responseText)
       },
     })
   }
 
+  // Retrieves JSON for specified username and updates game state accordingly
+  // TODO: update background, play music
   function load(userName) {
     $.ajax({
       type: "GET",
       url: "/game/load/" + userName,
-      success: function (e) {
+      complete: function (e) {
         console.log(e)
-        window.alert(e)
-      },
-      error: function (error) {
-        console.log(error)
-        window.alert("an error was encountered while attempting to load")
+        gameState = JSON.parse(e.responseText)
+        textBuilder(gameState.outputText)
       },
     })
   }
@@ -129,8 +127,4 @@ $(document).ready(function () {
     }
     $("#output").find("span").last().append("&nbsp;</span><br>")
   }
-
-  // Sets initial values for a new game.
-  $("#bgarea").css("background-image", "url(static/assets/bg-aus-208.png)")
-  load("sda")
 })
