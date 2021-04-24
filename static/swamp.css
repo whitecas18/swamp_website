@@ -76,4 +76,8 @@
     left: 2px;
     z-index: 1;
   }
+
+  #bgarea {
+    height: 45vh !important;
+  }
 }
