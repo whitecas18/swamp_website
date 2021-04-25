@@ -2,7 +2,6 @@ $(document).ready(function () {
   var input = document.getElementById("cmd")
   var output = document.getElementById("output")
   var audio = document.createElement("audio")
-  audio.setAttribute("id", "audio")
   var gameState = {
     inventory: {
       "Chocolate Bar": 0,
@@ -182,7 +181,7 @@ $(document).ready(function () {
   })
 
   document.body.addEventListener("touchstart", () => {
-    document.getElementById("audio").muted = false
+    audio.muted = false
     allowAudio = true
     playAudio()
   })
