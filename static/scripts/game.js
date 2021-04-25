@@ -110,7 +110,7 @@ $(document).ready(function () {
   //          goodend, badend, karlboss, overworld, startsong
   function playAudio(audName) {
     audio.pause()
-    audio.setAttribute("src", "../static/audio/" + audName + ".mp3")
+    audio.setAttribute("src", "../static/audio/" + audName + ".ogg")
     audio.play()
   }
 
