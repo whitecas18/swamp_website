@@ -27,6 +27,7 @@ $(document).ready(function () {
       "Humid, dark, and uninhabited.",
   }
 
+  var typing = false
   var allowAudio = false
   var firstplay = false
 
@@ -150,7 +151,7 @@ $(document).ready(function () {
   // When the enter key is pressed, text from the command box is sent to the server
   // and printed to the game's output box.
   $("#cmd").on("keyup", async function (event) {
-    if (event.keyCode === 13 && input.value != "") {
+    if (event.keyCode === 13 && input.value != "" && typing == false) {
       console.log(input.value)
       gameState.lastCommand = input.value
       $.ajax({
@@ -229,6 +230,7 @@ $(document).ready(function () {
   // @param style : the style you want to apply to your text (color, most likely)
   const sleepNow = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
   async function textBuilder(text, style) {
+    typing = true
     // A separate <span> exists for each text entry. This aids in culling when screen is full.
     $("#output").append("<span style='" + style + "'>")
 
@@ -254,7 +256,7 @@ $(document).ready(function () {
       cullOld()
     }
     $("#output").find("span").last().append("&nbsp;</span><br>")
-    return true
+    typing = false
   }
 
   // If username is present, load game data. Else, init as new game.

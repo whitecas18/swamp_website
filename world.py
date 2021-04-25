@@ -26,7 +26,7 @@ class world:
 		leaveend = location(
 			"leaveend",
 			{},
-			" Within minutes, the perils of the swamp are far behind you. But what about the others? Do you even care? LEAVE END.")
+			"Within minutes, the perils of the swamp are far behind you. But what about the others? Do you even care? LEAVE END.")
 
 		badend = location(
 			"badend",
