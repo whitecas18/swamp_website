@@ -21,11 +21,11 @@ Travel through East Carolina University, now warped into an unforgiving swamp la
     ├── templates             # HTML files          |           │   └── ...
     │   ├── about.html                              |           ├── scripts               # Javascript
     │   ├── index.html                              |           │   └── game.js
-    │   └── game.html                               |           ├── Alpha Mutation.ttf
-    ├── __init__.py                                 |           ├── Bleeding Pixels.ttf
-    ├── location.py                                 |           ├── about.css
-    ├── maze.py                                     |           ├── index.css
-    ├── util.py                                     |           └── swamp.css
+    │   └── game.html                               |           ├── Bleeding Pixels.ttf
+    ├── __init__.py                                 |           ├── about.css
+    ├── location.py                                 |           ├── index.css
+    ├── maze.py                                     |           └── swamp.css
+    ├── util.py                                     |
     ├── world.py                                    |
     ├── requirements.txt                            |
     └── README.md                                   |
@@ -61,5 +61,5 @@ pip3 install -r requirements.txt
 Then you can start the server with:
 
 ```
-python3 main.py
+python3 __init__.py
 ```
