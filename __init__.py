@@ -47,7 +47,7 @@ def gameCommand():
     stateJSON = request.get_json()
 
     # Command must match list of valid commands (duh!)
-    command = stateJSON['lastCommand'].lower().strip().split(' ')
+    command = stateJSON['lastCommand'].lower().strip().split(' ', 1)
     invalid = True
     for x in validCommands:
         if command[0] == x:

@@ -45,6 +45,14 @@
   z-index: 1;
 }
 
+#audiobutton {
+  position: absolute;
+  top: unset;
+  top: 35px;
+  left: 2px;
+  z-index: 1;
+}
+
 .modal {
   color: black;
 }
@@ -73,6 +81,14 @@
     position: absolute;
     top: unset;
     bottom: 2px;
+    left: 2px;
+    z-index: 1;
+  }
+
+  #audiobutton {
+    position: absolute;
+    top: unset;
+    bottom: 35px;
     left: 2px;
     z-index: 1;
   }

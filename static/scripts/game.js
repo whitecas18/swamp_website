@@ -4,15 +4,15 @@ $(document).ready(function () {
   var audio = document.createElement("audio")
   var gameState = {
     inventory: {
-      candyBar: 0,
-      ronnieCrystal: 0,
-      dingCrystal: 0,
-      hogCrystal: 0,
-      gopalCrystal: 0,
-      wuCrystal: 0,
-      hillsCrystal: 0,
+      "Chocolate Bar": 0,
+      "Ronnie's Insight": 0,
+      "Ding's Database": 0,
+      "Hoggard's Syntax": 0,
+      "Gopal's Proof": 0,
+      "Wu's Library": 0,
+      "Hills' API": 0,
     },
-    currentLocation: "austinstart",
+    currentLocation: "austin208",
     currentSong: "startsong",
     lastCommand: "",
     outputText:
@@ -26,31 +26,73 @@ $(document).ready(function () {
       "nowhere in sight. It is as if all of the ECU campus had become a swamp. " +
       "Humid, dark, and uninhabited.",
   }
+
+  var allowAudio = false
+
   var locationBG = {
     austin208: "aus-208",
-    austinstart: "aus-208",
-    austinhall: "aus-hall",
-    austinhills: "aus-hills",
-    austinclass: "aus-clas",
-    libraryentrance: "lb-ent",
-    libraryfront: "lb-frnt",
-    librarygopal: "lb-gopal",
-    librarymaze1: "lb-mz1",
-    librarymaze2: "lb-mz2",
-    librarymaze3: "lb-mz3",
-    libraryshrine: "lb-smth",
-    scitechding: "st-ding",
-    scitechkarl: "st-karl",
-    scitechoffice: "st-off",
-    scitechwu: "st-wu",
+    austin: "aus-hall",
+    hills: "aus-hills",
+    hoggard: "aus-clas",
+    libraryent: "lb-ent",
+    library: "lb-frnt",
+    gopal: "lb-gopal",
+    entrymaze: "lb-mz1",
+    maze1: "lb-mz2",
+    maze2: "lb-mz3",
+    maze3: "lb-mz1",
+    maze4: "lb-mz2",
+    maze5: "lb-mz3",
+    maze6: "lb-mz1",
+    maze7: "lb-mz2",
+    maze8: "lb-mz3",
+    maze9: "lb-mz1",
+    maze10: "lb-mz2",
+    maze11: "lb-mz3",
+    maze12: "lb-mz1",
+    ronnie: "lb-smth",
+    ding: "st-ding",
+    karl: "st-karl",
+    scitech: "st-off",
+    wu: "st-wu",
+    courtyard: "cty",
+  }
+  var locationMusic = {
+    austin208: "startsong",
+    austin: "overworld",
+    hills: "overworld",
+    hoggard: "overworld",
+    libraryent: "overworld",
+    library: "overworld",
+    gopal: "togarbage6",
+    entrymaze: "togarbage1",
+    maze1: "togarbage1",
+    maze2: "togarbage1",
+    maze3: "togarbage2",
+    maze4: "togarbage2",
+    maze5: "togarbage2",
+    maze6: "togarbage3",
+    maze7: "togarbage1",
+    maze8: "togarbage3",
+    maze9: "togarbage3",
+    maze10: "togarbage2",
+    maze11: "togarbage4",
+    maze12: "togarbage5",
+    ronnie: "shrine",
+    ding: "overworld",
+    karl: "karlboss",
+    scitech: "overworld",
+    wu: "overworld",
+    courtyard: "overworld",
   }
 
   // Sets initial values for a new game or a load
   function initGame() {
     console.log(gameState)
     textBuilder(gameState.outputText)
-    setBackground(locationBG[gameState.currentLocation])
-    playAudio(gameState.currentSong)
+    setBackground()
+    audio.volume = 0.2
+    console.log(audio.getAttribute("src"))
   }
 
   // Retrieves JSON for specified username and updates game state accordingly
@@ -113,6 +155,8 @@ $(document).ready(function () {
           gameState = JSON.parse(e.responseText)
           $.when(textBuilder("You " + input.value, "color:#1E9C00;")).done(function () {
             textBuilder(gameState.outputText)
+            if (allowAudio == true) playAudio()
+            setBackground
           })
           input.value = ""
         },
@@ -120,12 +164,28 @@ $(document).ready(function () {
     }
   })
 
+  // Loops all music, but not "TOGARBAGE" sound effects
+  audio.addEventListener("ended", function () {
+    if (audio.getAttribute("src").substring(16, 18) != "to") {
+      console.log("loopen")
+      this.currentTime = 0
+      this.play()
+    }
+  })
+
+  // Audio must be enabled by the user before playback begins!
+  $("#audio").on("click", function () {
+    allowAudio = true
+    playAudio()
+  })
+
   // Plays selected audio file
   // OPTIONS: togarbage1 - togarbage6, leaveend, chocoend, shrine
   //          goodend, badend, karlboss, overworld, startsong
-  function playAudio(audName) {
+  function playAudio() {
     audio.pause()
-    audio.setAttribute("src", "../static/audio/" + audName + ".ogg")
+    audio.setAttribute("src", "../static/audio/" + locationMusic[gameState.currentLocation] + ".ogg")
+    gameState.currentSong = locationMusic[gameState.currentLocation]
     audio.play()
   }
 
@@ -133,9 +193,9 @@ $(document).ready(function () {
   // OPTIONS: aus-208, aus-clas, aus-hall, aus-hills, cty
   //          lb-ent, lb-frnt, lb-gopal, lb-mz1 - lb-mz3,
   //          lb-smth, st-ding, st-karl, st-off, st-wu
-  function setBackground(bgName) {
-    $("#bgarea").css("background-image", "url(../static/assets/bg-" + bgName + ".png)")
-    console.log(bgName)
+  function setBackground() {
+    $("#bgarea").css("background-image", "url(../static/assets/bg-" + locationBG[gameState.currentLocation] + ".png)")
+    console.log()
   }
 
   // Cull oldest entry of output box if max height is exceeded. (accounts for small screens)
