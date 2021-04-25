@@ -1,10 +1,19 @@
 from location import location
 from maze import maze
+from interact import interact
 
 
 class world:
 	def __init__(self):
 			self.map = self.createMap()
+			self.interactions = {
+				"dr hills": interact(
+					"Hey, go ahead and shut that door behind you. Crazy day isn’t? Good thing I backed up yesterday in the Cloud or my office would be a disaster. Karl has gone a little off the rails with this Swamp thing, but I’m sure if you just go talk to him, he’ll undo it. Before you go, quick question.\n Which of the following is not defined as an important characteristic of virtualization?\n ( Fidelity, Performance, Low Power Consumption, Isolation/Safety)",
+					""
+					),
+				"dr ding" : ,
+				"dr wu" : ,
+				}
 
 
 	def createMap(self):
@@ -85,7 +94,98 @@ class world:
 
 		maze1 = maze(
 			"maze1"
-			{"east":"mazeentry", "west"}
+			{"east":"mazeentry", "west":"maze2"},
+			1
 			)
 
-		ronnie = location()
+		maze2 = maze(
+			"maze2"
+			{"east":"maze1", "north":"maze3"},
+			1
+			)
+
+		maze3 = maze(
+			"maze3"
+			{"south":"maze2", "east": "maze4", "west":"maze5", "north":"maze6"},
+			2
+			)
+
+		maze4 = maze(
+			"maze4"
+			{"east":"ronnie", "west":"maze3"},
+			2
+			)
+
+		maze5 = maze(
+			"maze5"
+			{"east":"maze3", "west":"maze7", "north":"maze8"},
+			2
+			)
+
+		maze6 = maze(
+			"maze6"
+			{"south":"maze3", "east":"maze9"},
+			3
+			)
+
+		maze7 = maze(
+			"maze7"
+			{"east":"maze5", "north":"maze10"},
+			1
+			)
+
+		maze8 = maze(
+			"maze8"
+			{"south":"maze7", "west":"maze10"},
+			3
+			)
+
+		maze9 = maze(
+			"maze9"
+			{"north":"maze11", "west":"maze6"},
+			3
+			)
+
+		maze10 = maze(
+			"maze10"
+			{"east":"maze8", "south":"maze7"},
+			2
+			)
+
+		maze11 = maze(
+			"maze11"
+			{"south":"maze9", "west":"maze12"},
+			4
+			)
+
+		maze12 = maze(
+			"maze12"
+			{"east":"maze11", "north":"gopaul"},
+			5
+			)
+
+		ronnie = location(
+			"ronnie",
+			{"west":"maze4"},
+			{"use":"computer"}
+			)
+
+		gopaul = location(
+			"gopaul",
+			{"south":"library"},
+			{"talk", "gopaul"}
+			)
+
+		return {"austin":austin, "hills":hills, "hoggard":hoggard, "austin208":austin208, "courtyard":courtyard, "libraryent":libraryent, "library":library, "scitech":scitech, "ding":ding, "wu":wu, "karl":karl, "mazeentry":mazeentry, "maze1":maze1, "maze2":maze2, "maze3":maze3, "maze4":maze4, "maze5":maze5, "maze6":maze6, "maze7":maze7, "maze8":maze8, "maze9":maze9, "maze10":maze10, "maze11":maze11, "maze12":maze12, "ronnie":ronnie, "gopaul":gopaul}
+
+
+	def navigate(self, direction, currentLoc):
+		if direction in self.map[currentLoc].getAdjacent():
+			return self.map[currentLoc].getAdjacent()[direction]
+		else:
+			return False
+
+	def interact(self, verb, object, currentLoc):
+		loc = self.map[currentLoc]
+		if verb in loc.getInteract():
+			if loc.getInteract()[verb] == object:

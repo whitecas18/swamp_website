@@ -6,7 +6,7 @@ class maze(location):
 		super().__init__(
 			name,
 			adjacent,
-			'As you ascend the stairs, you are met with a dimly-lit corridor. Each step you take sets forth a resounding echo. Stopping to listen carefully, you hear a faint voice in the distance.'
+			'you are met with a dimly-lit corridor. Each step you take sets forth a resounding echo. Stopping to listen carefully, you hear a faint voice in the distance.'
 			)
 		self.closeness = closeness
 
