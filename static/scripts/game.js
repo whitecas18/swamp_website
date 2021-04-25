@@ -175,7 +175,7 @@ $(document).ready(function () {
   })
 
   // Audio must be enabled by the user before playback begins!
-  $("#audio").on("click", function () {
+  $("#audiopress").on("click", function () {
     allowAudio = true
     playAudio()
   })
