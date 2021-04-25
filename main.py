@@ -34,14 +34,22 @@ def index():
 def about():
     return render_template('about.html')
 
-# Sends users to game page upon load
+# Sends users to game page 
 @app.route('/game')
 def game():
     return render_template('game.html')
 
+# Sends user to game page with a "loading" username set 
+@app.route('/game/<userName>')
+def loadGame(userName):
+    if (Saves.query.filter(Saves.name == userName).count() > 0):
+        return render_template('game.html', loadName=userName)
+    else:
+        return "Failed to load. Did you enter the correct username?"
+
 # Receives JSON object with game state (needs a set username!)
 # If name already exists, old one is deleted. Sad!
-@app.route('/game/save/<userName>', methods=['POST'])
+@app.route('/save/<userName>', methods=['POST'])
 def save(userName):
     stateJSON = request.get_json()
     print(stateJSON)
@@ -60,13 +68,14 @@ def save(userName):
 
 # Returns JSON object associated with given username
 # If name is not found, returns a string "failure"
-@app.route('/game/load/<userName>', methods=['GET'])
+@app.route('/load/<userName>', methods=['GET'])
 def load(userName):
     print(userName)
     if(Saves.query.filter(Saves.name == userName).count() > 0):
+        print(Saves.query.filter(Saves.name == userName).first().json)
         return Saves.query.filter(Saves.name == userName).first().json
     else:
-        return "failure"
+        return "failed"
 
 if __name__ == '__main__':
 	# set debug mode

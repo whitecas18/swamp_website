@@ -2,12 +2,9 @@ $(document).ready(function () {
   var input = document.getElementById("cmd")
   var output = document.getElementById("output")
   var audio = document.createElement("audio")
-
-  // Sets initial values for a new game.
-  $("#bgarea").css("background-image", "url(static/assets/bg-aus-208.png)")
   var gameState = {
     inventory: {
-      candyBar: 1,
+      candyBar: 0,
       ronnieCrystal: 0,
       dingCrystal: 0,
       hogCrystal: 0,
@@ -17,7 +14,72 @@ $(document).ready(function () {
     },
     currentLocation: "austinstart",
     currentSong: "startsong",
-    outputText: "",
+    outputText:
+      "You are jolted awake by the feeling of unrest. How long were you " +
+      "asleep? In front of you is a computer monitor, on but displaying " +
+      "only a blue screen. All the other monitors are in the same state. " +
+      "You realize you are in Austin 208, but there's something wrong. Not " +
+      "just with the computers, but with the very grounds of campus. The air is " +
+      "tainted, almost palatable in its stench. The windows are almost blocked by " +
+      "overgrown vines and moss, and the sky has turned a permanent gray, the sun " +
+      "nowhere in sight. It is as if all of the ECU campus had become a swamp. " +
+      "Humid, dark, and uninhabited.",
+  }
+  var locationBG = {
+    austin208: "aus-208",
+    austinstart: "aus-208",
+    austinhall: "aus-hall",
+    austinhills: "aus-hills",
+    austinclass: "aus-clas",
+    libraryentrance: "lb-ent",
+    libraryfront: "lb-frnt",
+    librarygopal: "lb-gopal",
+    librarymaze1: "lb-mz1",
+    librarymaze2: "lb-mz2",
+    librarymaze3: "lb-mz3",
+    libraryshrine: "lb-smth",
+    scitechding: "st-ding",
+    scitechkarl: "st-karl",
+    scitechoffice: "st-off",
+    scitechwu: "st-wu",
+  }
+
+  // Sets initial values for a new game or a load
+  function initGame() {
+    console.log(gameState)
+    textBuilder(gameState.outputText)
+    setBackground(locationBG[gameState.currentLocation])
+    playAudio(gameState.currentSong)
+  }
+
+  // Retrieves JSON for specified username and updates game state accordingly
+  // TODO: update background, play music
+  function load(userName) {
+    $.ajax({
+      type: "GET",
+      url: "/load/" + userName,
+      complete: function (e) {
+        console.log(e)
+        gameState = JSON.parse(e.responseText)
+        initGame()
+      },
+    })
+  }
+
+  // As it says, this function sends your game state to the server to be saved!
+  function save(userName) {
+    console.log(gameState)
+    $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(gameState),
+      dataType: "json",
+      url: "/save/" + userName,
+      complete: function (e) {
+        console.log(e)
+        window.alert(e.responseText)
+      },
+    })
   }
 
   // Button functions for html
@@ -32,37 +94,6 @@ $(document).ready(function () {
       save($("#userNameInput").val())
     }
   })
-
-  // As it says, this function sends your game state to the server to be saved!
-  function save(userName) {
-    console.log(gameState)
-    $.ajax({
-      async: false,
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(gameState),
-      dataType: "json",
-      url: "/game/save/" + userName,
-      complete: function (e) {
-        console.log(e)
-        window.alert(e.responseText)
-      },
-    })
-  }
-
-  // Retrieves JSON for specified username and updates game state accordingly
-  // TODO: update background, play music
-  function load(userName) {
-    $.ajax({
-      type: "GET",
-      url: "/game/load/" + userName,
-      complete: function (e) {
-        console.log(e)
-        gameState = JSON.parse(e.responseText)
-        textBuilder(gameState.outputText)
-      },
-    })
-  }
 
   // When the enter key is pressed, text from the command box is sent to the server
   // and printed to the game's output box.
@@ -79,8 +110,17 @@ $(document).ready(function () {
   //          goodend, badend, karlboss, overworld, startsong
   function playAudio(audName) {
     audio.pause()
-    audio.setAttribute("src", "static/audio/" + audName + ".mp3")
+    audio.setAttribute("src", "../static/audio/" + audName + ".mp3")
     audio.play()
+  }
+
+  // Sets background image
+  // OPTIONS: aus-208, aus-clas, aus-hall, aus-hills, cty
+  //          lb-ent, lb-frnt, lb-gopal, lb-mz1 - lb-mz3,
+  //          lb-smth, st-ding, st-karl, st-off, st-wu
+  function setBackground(bgName) {
+    $("#bgarea").css("background-image", "url(../static/assets/bg-" + bgName + ".png)")
+    console.log(bgName)
   }
 
   // Cull oldest entry of output box if max height is exceeded. (accounts for small screens)
@@ -106,7 +146,7 @@ $(document).ready(function () {
 
     for (let i = 0; i < text.length; i++) {
       // Wait a brief period between letters!
-      await sleepNow(50)
+      await sleepNow(40)
 
       // HTML trims off the spaces, so we need to add them back in like so.
       if (i != 0 && text.charAt(i - 1) == " ") {
@@ -120,11 +160,19 @@ $(document).ready(function () {
 
       // Waits longer when sentence endings are encountered.
       if (text.charAt(i) == "?" || text.charAt(i) == "." || text.charAt(i) == "!") {
-        await sleepNow(500)
+        await sleepNow(400)
       }
 
       cullOld()
     }
     $("#output").find("span").last().append("&nbsp;</span><br>")
+  }
+
+  // If username is present, load game data. Else, init as new game.
+  if ($("#loadHolder").text().length > 0) {
+    load($("#loadHolder").text())
+    console.log($("#loadHolder").text())
+  } else {
+    initGame()
   }
 })
