@@ -18,6 +18,26 @@ class world:
 
 	def createMap(self):
 
+		chocoend = location(
+			"chocoend",
+			{},
+			"Why would you do that? The five second rule is one thing… but the five-thousand year rule..? GASTRONOMIC END.")
+
+		leaveend = location(
+			"leaveend",
+			{},
+			" Within minutes, the perils of the swamp are far behind you. But what about the others? Do you even care? LEAVE END.")
+
+		badend = location(
+			"badend",
+			{},
+			"So close, yet so far. You displayed such hubris, but had nothing to show for it. This shameful display has sealed the fate of the campus. Good work. DEAD END.")
+
+		goodend = location(
+			"goodend",
+			{},
+			"... You’ve done it” A purify light emanates from Karl and explodes from him, growing brighter and larger. The light washes over you and campus. The dreadful presence dissipates from the campus. The Swamps hold on the campus is released, and ECU is restored to its former beauty. It feels like a dream. Suddenly, you are jolted awake, staring at your computer screen in Austin 208. You must’ve fallen asleep while doing homework. Beside you, there is a candy bar with a note that simply says “Thank you”. You take a bite of it and get back to work. GOOD END.")
+
 		austin = location(
 			"austin",
 			{"north":"hoggard","west":"hills","south":"208", "east":"courtyard"},

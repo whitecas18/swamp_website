@@ -57,6 +57,10 @@ $(document).ready(function () {
     scitech: "st-off",
     wu: "st-wu",
     courtyard: "cty",
+    chocoend: "choco",
+    leaveend: "leaveend",
+    badend: "badend",
+    goodend: "goodend",
   }
   var locationMusic = {
     austin208: "startsong",
@@ -85,6 +89,10 @@ $(document).ready(function () {
     scitech: "overworld",
     wu: "overworld",
     courtyard: "overworld",
+    chocoend: "chocoend",
+    badend: "badend",
+    goodend: "goodend",
+    leaveend: "leaveend",
   }
 
   // Sets initial values for a new game or a load
@@ -175,12 +183,7 @@ $(document).ready(function () {
   })
 
   // Audio must be enabled by the user before playback begins!
-  $("#audiopress").on("click", function () {
-    allowAudio = true
-    playAudio()
-  })
-
-  document.body.addEventListener("touchstart", () => {
+  $("#audiopress").on("click touchstart", function () {
     audio.muted = false
     allowAudio = true
     playAudio()
