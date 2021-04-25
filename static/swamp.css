@@ -47,7 +47,6 @@
 
 #audiobutton {
   position: absolute;
-  top: unset;
   top: 35px;
   left: 2px;
   z-index: 1;

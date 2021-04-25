@@ -28,6 +28,7 @@ $(document).ready(function () {
   }
 
   var allowAudio = false
+  var firstplay = false
 
   var locationBG = {
     austin208: "aus-208",
@@ -183,10 +184,13 @@ $(document).ready(function () {
   // OPTIONS: togarbage1 - togarbage6, leaveend, chocoend, shrine
   //          goodend, badend, karlboss, overworld, startsong
   function playAudio() {
-    audio.pause()
-    audio.setAttribute("src", "../static/audio/" + locationMusic[gameState.currentLocation] + ".ogg")
-    gameState.currentSong = locationMusic[gameState.currentLocation]
-    audio.play()
+    if (locationMusic[gameState.currentLocation] != gameState.currentSong || firstplay == false) {
+      audio.pause()
+      audio.setAttribute("src", "../static/audio/" + locationMusic[gameState.currentLocation] + ".ogg")
+      gameState.currentSong = locationMusic[gameState.currentLocation]
+      audio.play()
+      firstplay = true
+    }
   }
 
   // Sets background image
