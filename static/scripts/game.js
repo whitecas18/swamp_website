@@ -182,6 +182,8 @@ $(document).ready(function () {
 
   window.addEventListener("touchstart", () => {
     document.getElementById("audio").muted = false
+    allowAudio = true
+    playAudio()
   })
 
   // Plays selected audio file
