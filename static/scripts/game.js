@@ -180,10 +180,8 @@ $(document).ready(function () {
     playAudio()
   })
 
-  useEffect(() => {
-    window.addEventListener("touchstart", () => {
-      document.getElementById("audio").muted = false
-    })
+  window.addEventListener("touchstart", () => {
+    document.getElementById("audio").muted = false
   })
 
   // Plays selected audio file
