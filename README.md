@@ -26,9 +26,23 @@ Travel through East Carolina University, now warped into an unforgiving swamp la
     ├── location.py                                 |           ├── index.css
     ├── maze.py                                     |           └── swamp.css
     ├── world.py                                    |
+    ├── interact.py                                 |
     ├── requirements.txt                            |
     └── README.md                                   |
 
+```
+
+### We do not claim ownership over any of the music!
+
+```
+badend.ogg    : Fire Emblem The Sacred Stones - Game Over
+chocoend.ogg  : Undertale - Annoying Dog Theme
+shrine.ogg    : Shin Megami Tensei - Terminal
+goodend.ogg   : Umineko - Thanks for all people
+karlbos.ogg   : Shin Megami Tensei - Ginza
+leaveend.ogg  : Shin Megami Tensei - Ending
+overworld.ogg : The House in Fata Morgana - Drown in the Gutter
+startsong.ogg : Shin Megami Tensei - Dream
 ```
 
 ## Local Test Setup

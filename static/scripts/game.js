@@ -119,7 +119,7 @@ $(document).ready(function () {
   })
 
   // Plays selected audio file
-  // OPTIONS: togarbage1 - togarbage6, leaveend, chocoend,
+  // OPTIONS: togarbage1 - togarbage6, leaveend, chocoend, shrine
   //          goodend, badend, karlboss, overworld, startsong
   function playAudio(audName) {
     audio.pause()
