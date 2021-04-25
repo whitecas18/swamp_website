@@ -18,6 +18,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # provides access to all the functionality of Flask-SQLAlchemy.
 db = SQLAlchemy(app)
 
+validCommands = ['go','get','use','talk','answer','inventory','leave']
+
 # Class allows one to query the database
 class Saves(db.Model):
     __tablename__= 'saves'
@@ -38,6 +40,23 @@ def about():
 @app.route('/game')
 def game():
     return render_template('game.html')
+
+# Receives user commands and returns updated state. 
+@app.route('/game/command', methods=['POST'])
+def gameCommand():
+    stateJSON = request.get_json()
+
+    # Command must match list of valid commands (duh!)
+    command = stateJSON['lastCommand'].lower().strip().split(' ')
+    invalid = True
+    for x in validCommands:
+        if command[0] == x:
+            invalid = False
+
+    if invalid:
+        return "invalid"
+    else:
+        return "valid"
 
 # Sends user to game page with a "loading" username set 
 @app.route('/game/<userName>')

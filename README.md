@@ -25,7 +25,6 @@ Travel through East Carolina University, now warped into an unforgiving swamp la
     ├── __init__.py                                 |           ├── about.css
     ├── location.py                                 |           ├── index.css
     ├── maze.py                                     |           └── swamp.css
-    ├── util.py                                     |
     ├── world.py                                    |
     ├── requirements.txt                            |
     └── README.md                                   |

@@ -14,6 +14,7 @@ $(document).ready(function () {
     },
     currentLocation: "austinstart",
     currentSong: "startsong",
+    lastCommand: "",
     outputText:
       "You are jolted awake by the feeling of unrest. How long were you " +
       "asleep? In front of you is a computer monitor, on but displaying " +
@@ -100,8 +101,20 @@ $(document).ready(function () {
   $("#cmd").on("keyup", function (event) {
     if (event.keyCode === 13 && input.value != "") {
       console.log(input.value)
-      textBuilder("You " + input.value, "color:#1E9C00;")
-      input.value = ""
+      gameState.lastCommand = input.value
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(gameState),
+        dataType: "json",
+        url: "/game/command",
+        complete: function (e) {
+          console.log(e)
+          window.alert(e.responseText)
+          textBuilder("You " + input.value, "color:#1E9C00;")
+          input.value = ""
+        },
+      })
     }
   })
 
