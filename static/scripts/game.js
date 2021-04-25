@@ -180,6 +180,12 @@ $(document).ready(function () {
     playAudio()
   })
 
+  useEffect(() => {
+    window.addEventListener("touchstart", () => {
+      document.getElementById("audio").muted = false
+    })
+  })
+
   // Plays selected audio file
   // OPTIONS: togarbage1 - togarbage6, leaveend, chocoend, shrine
   //          goodend, badend, karlboss, overworld, startsong
