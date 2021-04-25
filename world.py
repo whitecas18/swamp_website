@@ -1,6 +1,7 @@
 from location import location
 from maze import maze
 from interact import interact
+from karl import karl
 
 
 class world:
@@ -9,10 +10,46 @@ class world:
 			self.interactions = {
 				"dr hills": interact(
 					"Hey, go ahead and shut that door behind you. Crazy day isn’t? Good thing I backed up yesterday in the Cloud or my office would be a disaster. Karl has gone a little off the rails with this Swamp thing, but I’m sure if you just go talk to him, he’ll undo it. Before you go, quick question.\n Which of the following is not defined as an important characteristic of virtualization?\n ( Fidelity, Performance, Low Power Consumption, Isolation/Safety)",
-					""
+					"low power consumption",
+					"Hills’ API",
 					),
-				"dr ding" : ,
-				"dr wu" : ,
+
+				"dr ding" : interact(
+					"Have you ever considered existence itself…. Is a database? The grounds may be empty…. but the tuples…. the tuples are filled. Filled with every soul that has been…. And ever will be. My knowledge is not free…. You must answer me this...\n Which relational algebra operation does the SQL select clause map to?\n (Select/Project/Cartesian Product/Union) ",
+					"project",
+					"Ding’s Database"
+					),
+
+				"dr wu" : interact(
+					"It’s no use. No matter how many GPUs I have none of this data makes any sense. The Swamp’s expansion cannot be stopped. Your only hope is to go to the source. You’ll need my knowledge if you hope to survive.\nWhich portion of this URL identifies the process on the host machine? https://www.cs.ecu.edu/?word=hello \n(https/cs/?word/none)",
+					"none",
+					"Wu’s Library"
+					),
+
+				"hoggard" : interact(
+					"Just because the campus has been overwhelmed by a swamp doesn’t excuse you being late to my class. Luckily, you’re just in time for a pop quiz. Closed notes of course.\nWhich of the following is an email access protocol?\n(MIME/SMTP/IMAP/RFC2822)",
+					"imap",
+					"Hoggard’s Syntax"
+					),
+
+				"computer" : interact(
+					"SMITHR@CSHRINE ~> Greetings. I had my doubts you’d find this place. I thought about leaving instructions in Austin 208 but that’d wouldn’t be much of a test, would it?  Probably should have given you a heads up about the candy bars though. Your reward for finding this location is a question. Don’t worry, this is an easy one\nWhat is the maximum number of edges in a directed graph with n nodes? (assuming no edges to themself)\n(n*(n-1)), (n/(n-1)), (n+(n-1)), (n*(n+1))"
+					"n*(n-1)",
+					"Ronnie’s Insight"
+					),
+
+				"dr gopal" : interact(
+					"Put it to garbage Put it to garbage Put it to ggarbage Putitto garbage Put it to gar age Put it to garbage! Put it to garbage Put itto garbage Put it to gARBage Put it to garbage PPut it to garbgae Put it to g a r b a g e Put it to gArBaGe PutItToGarbage",
+					None,
+					"Gopal’s Proof"
+					),
+
+				"candy bar": interact(
+					"HUZZAH! The candy bar is yours!",
+					None,
+					"Chocolate Bar"
+					)
+				"karl": karl()
 				}
 
 
@@ -106,7 +143,7 @@ class world:
 			{"talk":"karl"}
 			)
 
-		mazeentry = location(
+		entrymaze = location(
 			"mazestart",
 			{"west":"library"},
 			"As you ascend the stairs, you are met with a dimly-lit corridor. Each step you take sets forth a resounding echo. Stopping to listen carefully, you hear a faint voice in the distance... WEST leads you back to the LIBRARY. EAST leads you deeper..."
@@ -114,7 +151,7 @@ class world:
 
 		maze1 = maze(
 			"maze1"
-			{"east":"mazeentry", "west":"maze2"},
+			{"east":"entrymaze", "west":"maze2"},
 			1
 			)
 
@@ -180,7 +217,7 @@ class world:
 
 		maze12 = maze(
 			"maze12"
-			{"east":"maze11", "north":"gopaul"},
+			{"east":"maze11", "north":"gopal"},
 			5
 			)
 
@@ -191,14 +228,13 @@ class world:
 			{"use":"computer"}
 			)
 
-		gopaul = location(
-			"gopaul",
+		gopal = location(
+			"gopal",
 			{"south":"library"},
 			"You finally reach the source of the sound. DR. GOPAL sits alone in a library study room. In front of him is a 3 monitors setup, none of which are turned on. DR. GOPAL is holding a microphone chanting the same phrase repeatedly into it. He doesn’t even notice you, too focused on his “recording”. | To the SOUTH is the exit back into the maze"
-			{"talk", "gopaul"}
 			)
 
-		return {"austin":austin, "hills":hills, "hoggard":hoggard, "austin208":austin208, "courtyard":courtyard, "libraryent":libraryent, "library":library, "scitech":scitech, "ding":ding, "wu":wu, "karl":karl, "mazeentry":mazeentry, "maze1":maze1, "maze2":maze2, "maze3":maze3, "maze4":maze4, "maze5":maze5, "maze6":maze6, "maze7":maze7, "maze8":maze8, "maze9":maze9, "maze10":maze10, "maze11":maze11, "maze12":maze12, "ronnie":ronnie, "gopaul":gopaul}
+		return {"austin":austin, "hills":hills, "hoggard":hoggard, "austin208":austin208, "courtyard":courtyard, "libraryent":libraryent, "library":library, "scitech":scitech, "ding":ding, "wu":wu, "karl":karl, "entrymaze":entrymaze, "maze1":maze1, "maze2":maze2, "maze3":maze3, "maze4":maze4, "maze5":maze5, "maze6":maze6, "maze7":maze7, "maze8":maze8, "maze9":maze9, "maze10":maze10, "maze11":maze11, "maze12":maze12, "ronnie":ronnie, "gopal":gopal}
 
 
 	def navigate(self, direction, currentLoc):
