@@ -98,7 +98,7 @@ $(document).ready(function () {
 
   // When the enter key is pressed, text from the command box is sent to the server
   // and printed to the game's output box.
-  $("#cmd").on("keyup", function (event) {
+  $("#cmd").on("keyup", async function (event) {
     if (event.keyCode === 13 && input.value != "") {
       console.log(input.value)
       gameState.lastCommand = input.value
@@ -110,8 +110,10 @@ $(document).ready(function () {
         url: "/game/command",
         complete: function (e) {
           console.log(e)
-          window.alert(e.responseText)
-          textBuilder("You " + input.value, "color:#1E9C00;")
+          gameState = JSON.parse(e.responseText)
+          $.when(textBuilder("You " + input.value, "color:#1E9C00;")).done(function () {
+            textBuilder(gameState.outputText)
+          })
           input.value = ""
         },
       })
@@ -179,6 +181,7 @@ $(document).ready(function () {
       cullOld()
     }
     $("#output").find("span").last().append("&nbsp;</span><br>")
+    return true
   }
 
   // If username is present, load game data. Else, init as new game.

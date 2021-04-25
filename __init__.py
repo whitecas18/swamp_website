@@ -54,9 +54,11 @@ def gameCommand():
             invalid = False
 
     if invalid:
-        return "invalid"
+        stateJSON['outputText'] = "Invalid command entered."
     else:
-        return "valid"
+        stateJSON['outputText'] = "Valid command entered!"
+
+    return json.dumps(stateJSON)
 
 # Sends user to game page with a "loading" username set 
 @app.route('/game/<userName>')
