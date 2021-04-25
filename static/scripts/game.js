@@ -2,6 +2,7 @@ $(document).ready(function () {
   var input = document.getElementById("cmd")
   var output = document.getElementById("output")
   var audio = document.createElement("audio")
+  audio.setAttribute("id", "audio")
   var gameState = {
     inventory: {
       "Chocolate Bar": 0,
