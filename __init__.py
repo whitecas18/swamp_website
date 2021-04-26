@@ -1,4 +1,6 @@
 import os, json
+from maze import maze
+from world import world
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_, func, insert, update
@@ -18,7 +20,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # provides access to all the functionality of Flask-SQLAlchemy.
 db = SQLAlchemy(app)
 
-validCommands = ['go','get','use','talk','answer','inventory','leave']
+validCommands = ['go','get','use','talk','answer','leave']
 
 # Class allows one to query the database
 class Saves(db.Model):
@@ -47,7 +49,7 @@ def gameCommand():
     stateJSON = request.get_json()
 
     # Command must match list of valid commands (duh!)
-    command = stateJSON['lastCommand'].lower().strip().split(' ', 1)
+    command = stateJSON['lastCommand'].lower().strip().split(' ')
     invalid = True
     for x in validCommands:
         if command[0] == x:
@@ -55,8 +57,30 @@ def gameCommand():
 
     if invalid:
         stateJSON['outputText'] = "Invalid command entered."
+        return json.dumps(stateJSON)
+
+    newWorld = world()
+
+    if command[0] == "go":
+        print("go")
+        location = newWorld.navigate(command[1],stateJSON['currentLocation'])
+        if location == False:
+            stateJSON['outputText'] = "Invalid location"
+        else:
+            stateJSON['currentLocation'] = location
+            stateJSON['outputText'] = newWorld.getmap()[location].getText()
+            if type(newWorld.getmap()[location]) is maze:
+                stateJSON['outputText'] += newWorld.getmap()[location].getText()
+
+    elif command[0] == "answer":
+        print("answer")
+        stateJSON['outputText'] = "Answer command"
+    elif command[0] == "leave":
+        print("leave")
+        stateJSON['outputText'] = "Leave command"
     else:
-        stateJSON['outputText'] = "Valid command entered!"
+        print("interact")
+        stateJSON['outputText'] = "Interact command"
 
     return json.dumps(stateJSON)
 
@@ -100,7 +124,7 @@ def load(userName):
 
 if __name__ == '__main__':
 	# set debug mode
-    app.debug = False
+    app.debug = True
     # your local machine ip
     ip = '127.0.0.1'
     app.run(host=ip)

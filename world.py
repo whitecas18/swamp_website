@@ -48,7 +48,7 @@ class world:
 					"HUZZAH! The candy bar is yours!",
 					None,
 					"Chocolate Bar"
-					)
+					),
 				"karl": karl()
 				}
 
@@ -93,7 +93,7 @@ class world:
 
 		austin208 = location(
 			"austin208",
-			{"north: austin"},
+			{"north" : "austin"},
 			"The room is absolutely littered with chicken sandwich wrappers. There is also a pile of dubious looking CANDY BARS. Austin proper is to the NORTH",
 			{"take": "candy bar"}
 			)
@@ -112,7 +112,7 @@ class world:
 
 		library = location(
 			"library",
-			{"east":"maze", "south":"libraryent"},
+			{"east":"entrymaze", "south":"libraryent"},
 			"Dim green lighting greets you and a sour, swamp-like smell fills your nostrils as you walk into the LIBRARY.  As you enter the foyer, you realize that the fluorescent lighting has been replaced by green torches that cover the walls, flickering ominously.  The sour smell seems to be emanating from a broken refrigerator from the obviously abandoned coffee shop to your left. | To the NORTH lies a staircase leading upwards.  An exit to the LIBRARY is to the SOUTH."
 			)
 
@@ -145,78 +145,78 @@ class world:
 
 		entrymaze = location(
 			"mazestart",
-			{"west":"library"},
+			{"west":"library", "east":"maze1"},
 			"As you ascend the stairs, you are met with a dimly-lit corridor. Each step you take sets forth a resounding echo. Stopping to listen carefully, you hear a faint voice in the distance... WEST leads you back to the LIBRARY. EAST leads you deeper..."
 			)
 
 		maze1 = maze(
-			"maze1"
+			"maze1",
 			{"east":"entrymaze", "west":"maze2"},
 			1
 			)
 
 		maze2 = maze(
-			"maze2"
+			"maze2",
 			{"east":"maze1", "north":"maze3"},
 			1
 			)
 
 		maze3 = maze(
-			"maze3"
+			"maze3",
 			{"south":"maze2", "east": "maze4", "west":"maze5", "north":"maze6"},
 			2
 			)
 
 		maze4 = maze(
-			"maze4"
+			"maze4",
 			{"east":"ronnie", "west":"maze3"},
 			2
 			)
 
 		maze5 = maze(
-			"maze5"
+			"maze5",
 			{"east":"maze3", "west":"maze7", "north":"maze8"},
 			2
 			)
 
 		maze6 = maze(
-			"maze6"
+			"maze6",
 			{"south":"maze3", "east":"maze9"},
 			3
 			)
 
 		maze7 = maze(
-			"maze7"
+			"maze7",
 			{"east":"maze5", "north":"maze10"},
 			1
 			)
 
 		maze8 = maze(
-			"maze8"
+			"maze8",
 			{"south":"maze7", "west":"maze10"},
 			3
 			)
 
 		maze9 = maze(
-			"maze9"
+			"maze9",
 			{"north":"maze11", "west":"maze6"},
 			3
 			)
 
 		maze10 = maze(
-			"maze10"
+			"maze10",
 			{"east":"maze8", "south":"maze7"},
 			2
 			)
 
 		maze11 = maze(
-			"maze11"
+			"maze11",
 			{"south":"maze9", "west":"maze12"},
 			4
 			)
 
 		maze12 = maze(
-			"maze12"
+			"maze12",
 			{"east":"maze11", "north":"gopal"},
 			5
 			)
@@ -224,7 +224,7 @@ class world:
 		ronnie = location(
 			"ronnie",
 			{"west":"maze4"},
-			"Another dead end… or is it? While there is no room or door in sight, there is an old computer sitting on a table in front of you. It is surrounded by candles and a single prompt is displayed on the screen. SMITHR@CSHRINE ~> | To the EAST is the exit back into the maze"
+			"Another dead end… or is it? While there is no room or door in sight, there is an old computer sitting on a table in front of you. It is surrounded by candles and a single prompt is displayed on the screen. SMITHR@CSHRINE ~> | To the EAST is the exit back into the maze",
 			{"use":"computer"}
 			)
 
@@ -236,6 +236,8 @@ class world:
 
 		return {"austin":austin, "hills":hills, "hoggard":hoggard, "austin208":austin208, "courtyard":courtyard, "libraryent":libraryent, "library":library, "scitech":scitech, "ding":ding, "wu":wu, "karl":karl, "entrymaze":entrymaze, "maze1":maze1, "maze2":maze2, "maze3":maze3, "maze4":maze4, "maze5":maze5, "maze6":maze6, "maze7":maze7, "maze8":maze8, "maze9":maze9, "maze10":maze10, "maze11":maze11, "maze12":maze12, "ronnie":ronnie, "gopal":gopal}
 
+	def getmap(self):
+		return self.map
 
 	def navigate(self, direction, currentLoc):
 		if direction in self.map[currentLoc].getAdjacent():
@@ -262,9 +264,6 @@ class world:
 
 		return "Incorrect."
 
-
-
-
 	def talk(self, verb, obj, currentLoc):
 		loc = self.map[currentLoc]
 		if verb in loc.getInteract():
@@ -280,16 +279,13 @@ class world:
 
 		return False
 
-
 	def interact(self, command, currentLoc):
 		try:
-			comArr = command.split(" ". 1)
+			comArr = command.split(" ", 1)
 			verb = comArr[0].lower()
 			obj = comArr[1]
 
 			if verb == "go":
-				return navigate*
-
-
+				return ""
 		except:
 			return False

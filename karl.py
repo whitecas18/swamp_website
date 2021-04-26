@@ -1,5 +1,5 @@
 class karl:
-	def __init__():
+	def __init__(self):
 		self.questions = [
 			"Does P=NP?(Y/N)",
 			"Write a regular expression that consists of all strings over alphabet {a, b} that have aabb as a contiguous substring(U is union)(No spaces).",

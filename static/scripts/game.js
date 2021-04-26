@@ -167,7 +167,7 @@ $(document).ready(function () {
           $.when(textBuilder("You " + input.value, "color:#1E9C00;")).done(function () {
             textBuilder(gameState.outputText)
             if (allowAudio == true) playAudio()
-            setBackground
+            setBackground()
           })
           input.value = ""
         },
@@ -237,7 +237,7 @@ $(document).ready(function () {
 
     for (let i = 0; i < text.length; i++) {
       // Wait a brief period between letters!
-      await sleepNow(40)
+      await sleepNow(10)
 
       // HTML trims off the spaces, so we need to add them back in like so.
       if (i != 0 && text.charAt(i - 1) == " ") {
@@ -251,7 +251,7 @@ $(document).ready(function () {
 
       // Waits longer when sentence endings are encountered.
       if (text.charAt(i) == "?" || text.charAt(i) == "." || text.charAt(i) == "!") {
-        await sleepNow(400)
+        await sleepNow(40)
       }
 
       cullOld()
