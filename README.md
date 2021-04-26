@@ -40,7 +40,7 @@ badend.ogg    : Fire Emblem The Sacred Stones - Game Over
 chocoend.ogg  : Undertale - Annoying Dog Theme
 shrine.ogg    : Shin Megami Tensei - Terminal
 goodend.ogg   : Umineko - Thanks for all people
-karlbos.ogg   : Shin Megami Tensei - Ginza
+karlbos.ogg   : MASTER BOOT RECORD - Irc
 leaveend.ogg  : Shin Megami Tensei - Ending
 overworld.ogg : The House in Fata Morgana - Drown in the Gutter
 startsong.ogg : Shin Megami Tensei - Dream
