@@ -149,7 +149,8 @@ $(document).ready(function () {
   })
 
   // When the enter key is pressed, text from the command box is sent to the server
-  // and printed to the game's output box.
+  // and printed to the game's output box. Blank input and input while output is still
+  // being rendered will result in NOTHING!!
   $("#cmd").on("keyup", async function (event) {
     if (event.keyCode === 13 && input.value != "" && typing == false) {
       console.log(input.value)
