@@ -78,7 +78,7 @@ class world:
 		austin = location(
 			"austin",
 			{"north":"hoggard","west":"hills","south":"208", "east":"courtyard"},
-			"The ground of the hallway feels as if it’d pull you in if you stood there too long. It may be your imagination, but it seems as if the hallway itself is rotating. The other classrooms are almost inaccessible. The large, crawling vines make traversal through the hall a dangerous task.| To the NORTH lies and an office labeled “HOGGARD”. To the WEST lies an office labeled “HILLS”. To the SOUTH lies Austin 208.")
+			"The ground of the hallway feels as if it’d pull you in if you stood there too long. It may be your imagination, but it seems as if the hallway itself is rotating. The other classrooms are almost inaccessible. The large, crawling vines make traversal through the hall a dangerous task.| To the NORTH lies and an office labeled “HOGGARD”. To the WEST lies an office labeled “HILLS”. To the SOUTH lies Austin 208. To the EAST lies the COURTYARD")
 
 		hills = location(
 			"hills",
@@ -88,7 +88,7 @@ class world:
 
 		hoggard = location("hoggard",
 			{"south":"austin"},
-			"Text - The classroom is empty, barring one figure. HOGGARD is standing next to the desk, eating cup noodles as his powerpoints slides rapidly flash by. He smiles when he sees you.| To the SOUTH is the office exit",
+			"The classroom is empty, barring one figure. HOGGARD is standing next to the desk, eating cup noodles as his powerpoints slides rapidly flash by. He smiles when he sees you.| To the SOUTH is the office exit",
 			{"talk": "hoggard"})
 
 		austin208 = location(
@@ -107,19 +107,19 @@ class world:
 		libraryent = location(
 			"libraryent",
 			{"north":"library", "east":"scitech", "south":"courtyard"},
-			"Text - Despite the chaotic state the campus is in, The Library remains intact. The putrid smell that coats the campus is even stronger here. Green light glows through the glass of the double doors. To the EAST lies the LIBRARY doors. To the NORTH lies the SCI-TECH building. To the SOUTH lies the COURTYARD"
+			"Despite the chaotic state the campus is in, The Library remains intact. The putrid smell that coats the campus is even stronger here. Green light glows through the glass of the double doors. To the NORTH lies the LIBRARY doors. To the EAST lies the SCI-TECH building. To the SOUTH lies the COURTYARD"
 			)
 
 		library = location(
 			"library",
 			{"east":"entrymaze", "south":"libraryent"},
-			"Dim green lighting greets you and a sour, swamp-like smell fills your nostrils as you walk into the LIBRARY.  As you enter the foyer, you realize that the fluorescent lighting has been replaced by green torches that cover the walls, flickering ominously.  The sour smell seems to be emanating from a broken refrigerator from the obviously abandoned coffee shop to your left. | To the NORTH lies a staircase leading upwards.  An exit to the LIBRARY is to the SOUTH."
+			"Dim green lighting greets you and a sour, swamp-like smell fills your nostrils as you walk into the LIBRARY.  As you enter the foyer, you realize that the fluorescent lighting has been replaced by green torches that cover the walls, flickering ominously.  The sour smell seems to be emanating from a broken refrigerator from the obviously abandoned coffee shop to your left. | To the EAST lies a staircase leading upwards.  An exit to the LIBRARY is to the SOUTH."
 			)
 
 		scitech = location(
 			"scitech",
 			{"west":"libraryent", "north":"ding", "east":"wu", "south":"karl"},
-			"Text - The windows of the once great Sci Tech building are all shattered, and the swamp’s life is completely overtaking the building. The entrance way, however, is still reachable through the trees. There is knowledge here, you can feel it. | To the NORTH lies an office labeled ‘WU”.  To the WEST lies an office labeled “DING”. To the EAST is a door to the basement, dangerous energy emanating from it. "
+			"The windows of the once great Sci Tech building are all shattered, and the swamp’s life is completely overtaking the building. The entrance way, however, is still reachable through the trees. There is knowledge here, you can feel it. | To the EAST lies an office labeled ‘WU”.  To the NORTH lies an office labeled “DING”. To the SOUTH is a door to the basement, dangerous energy emanating from it. To the WEST is the LIBRARY"
 			)
 
 		ding = location(
@@ -132,14 +132,14 @@ class world:
 		wu = location(
 			"wu",
 			{"west":"scitech"},
-			"Text - You hear the sound of a thousand GPUs whirring away, analyzing dataset after dataset of dubious origin. Curiously, not a single one of them is in sight. The residual heat, however, is readily felt. DR. WU is at his battlestation, typing frantically. | To the SOUTH is the office exit",
+			"You hear the sound of a thousand GPUs whirring away, analyzing dataset after dataset of dubious origin. Curiously, not a single one of them is in sight. The residual heat, however, is readily felt. DR. WU is at his battlestation, typing frantically. | To the WEST is the office exit",
 			{"talk":"dr wu"}
 			)
 
 		karl = location(
 			"karl",
 			{"north":"scitech"},
-			"You enter the SciTech basement. There is not a single window; piles of computers extend as far as the eye can see. Wires hang from the ceiling, leading to nowhere in particular. You see KARL working on a computer with a large smiley face stamped on the side. | If you wish to retreat, the basement exit is to the SOUTH",
+			"You enter the SciTech basement. There is not a single window; piles of computers extend as far as the eye can see. Wires hang from the ceiling, leading to nowhere in particular. You see KARL working on a computer with a large smiley face stamped on the side. | If you wish to retreat, the basement exit is to the NORTH",
 			{"talk":"karl"}
 			)
 
