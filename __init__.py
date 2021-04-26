@@ -89,7 +89,7 @@ def gameCommand():
             karlanswer = newKarl.isAnswerCorrect(gemcount,command[1])
             if karlanswer:
                 stateJSON['currentLocation'] = 'goodend'
-                stateJSON['outputText'] = '... You’ve done it” A purifying light emanates from Karl and explodes from him, growing brighter and larger. The light washes over you and campus. The dreadful presence dissipates from the campus. The Swamps hold on the campus is released, and ECU is restored to its former beauty. It feels like a dream. Suddenly, you are jolted awake, staring at your computer screen in Austin 208. You must’ve fallen asleep while doing homework. Beside you, there is a candy bar with a note that simply says “Thank you”. You take a bite of it and get back to work. ×GOOD END.'
+                stateJSON['outputText'] = '... You’ve done it” A purifying light emanates from Karl and explodes from him, growing brighter and larger. The light washes over you and the campus. The dreadful presence dissipates. The Swamps\' hold on the campus is released, and ECU is restored to its former beauty. It feels like a dream. Suddenly, you are jolted awake, staring at your computer screen in Austin 208. You must’ve fallen asleep while doing homework. Beside you, there is a candy bar with a note that simply says “Thank you”. You take a bite of it and get back to work. ×GOOD END.'
             else:
                 stateJSON['currentLocation'] = 'badend'
                 stateJSON['outputText'] = 'So close, yet so far. You displayed such hubris, but had nothing to show for it. This shameful display has sealed the fate of the campus. Good work. ×DEAD END.'
@@ -117,7 +117,7 @@ def gameCommand():
         interact = newWorld.talk(command[0],command[1].lower(),stateJSON['currentLocation'])
         if command[1].lower() == "candy bar" and command[0] == "get" and stateJSON['currentLocation'] == "austin208":
             stateJSON['currentLocation'] = "chocoend"
-            stateJSON['outputText'] = "You snatch up the candy bar and DEVOUR it. Why would you do that? The five second rule is one thing… but the five-thousand year rule..? ×GASTRONOMIC END."
+            stateJSON['outputText'] = "You snatch up the candy bar and DEVOUR it. Why would you do that? You keel over and die from the poisonous swamp chocolate. ×GASTRONOMIC END."
         elif interact == False:
             stateJSON['outputText'] = karlBadInput()
         elif command[1].lower() == "dr gopal":
