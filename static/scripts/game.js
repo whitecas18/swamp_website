@@ -100,7 +100,7 @@ $(document).ready(function () {
     console.log(gameState)
     textBuilder(gameState.outputText)
     setBackground()
-    audio.volume = 0.4
+    audio.volume = 0.3
     console.log(audio.getAttribute("src"))
   }
 

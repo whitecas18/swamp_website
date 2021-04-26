@@ -77,7 +77,7 @@ def gameCommand():
                 stateJSON['outputText'] += "×" + newWorld.getmap()[location].getAdjacentString()
 
     elif stateJSON['currentLocation'] == 'karl':
-        gemcount = -2
+        gemcount = 0
         for i in stateJSON['inventory']:
             gemcount += stateJSON['inventory'][i]
         newKarl = karl()
