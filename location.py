@@ -23,3 +23,11 @@ class location:
 
 	def getInteract(self):
 		return self.interact
+
+	def getAdjacentString(self):
+		adjString = " There are exits "
+
+		for i in self.adjacent:
+			adjString += i.upper() + ", "
+
+		return adjString[:-2] + "."

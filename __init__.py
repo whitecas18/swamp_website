@@ -1,9 +1,12 @@
 import os, json
+from karl import karl
 from maze import maze
 from world import world
 from flask import Flask, request, render_template, redirect
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import and_, func, insert, update
+from random import randrange
+
 
 # get current app directory
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -48,15 +51,16 @@ def game():
 def gameCommand():
     stateJSON = request.get_json()
 
+    # TODO: CLEAN THIS SHIT UP. OH MY GOD!
     # Command must match list of valid commands (duh!)
-    command = stateJSON['lastCommand'].lower().strip().split(' ')
+    command = stateJSON['lastCommand'].lower().strip().split(' ', 1)
     invalid = True
     for x in validCommands:
         if command[0] == x:
             invalid = False
 
     if invalid:
-        stateJSON['outputText'] = "Invalid command entered."
+        stateJSON['outputText'] = karlBadInput()
         return json.dumps(stateJSON)
 
     newWorld = world()
@@ -65,24 +69,71 @@ def gameCommand():
         print("go")
         location = newWorld.navigate(command[1],stateJSON['currentLocation'])
         if location == False:
-            stateJSON['outputText'] = "Invalid location"
+            stateJSON['outputText'] = karlBadInput()
         else:
             stateJSON['currentLocation'] = location
             stateJSON['outputText'] = newWorld.getmap()[location].getText()
             if type(newWorld.getmap()[location]) is maze:
-                stateJSON['outputText'] += newWorld.getmap()[location].getText()
+                stateJSON['outputText'] += "×" + newWorld.getmap()[location].getAdjacentString()
+
+    elif stateJSON['currentLocation'] == 'karl':
+        gemcount = -2
+        for i in stateJSON['inventory']:
+            gemcount += stateJSON['inventory'][i]
+        newKarl = karl()
+
+        if command[0] == 'talk':
+            question = newKarl.getQuestion(gemcount)
+            stateJSON['outputText'] = newKarl.getText() + question 
+        elif command[0] == 'answer':
+            karlanswer = newKarl.isAnswerCorrect(gemcount,command[1])
+            if karlanswer:
+                stateJSON['currentLocation'] = 'goodend'
+                stateJSON['outputText'] = '... You’ve done it” A purifying light emanates from Karl and explodes from him, growing brighter and larger. The light washes over you and campus. The dreadful presence dissipates from the campus. The Swamps hold on the campus is released, and ECU is restored to its former beauty. It feels like a dream. Suddenly, you are jolted awake, staring at your computer screen in Austin 208. You must’ve fallen asleep while doing homework. Beside you, there is a candy bar with a note that simply says “Thank you”. You take a bite of it and get back to work. ×GOOD END.'
+            else:
+                stateJSON['currentLocation'] = 'badend'
+                stateJSON['outputText'] = 'So close, yet so far. You displayed such hubris, but had nothing to show for it. This shameful display has sealed the fate of the campus. Good work. ×DEAD END.'
 
     elif command[0] == "answer":
         print("answer")
-        stateJSON['outputText'] = "Answer command"
-    elif command[0] == "leave":
+        answer = newWorld.answer(stateJSON['currentLocation'],command[1].lower())
+
+        if answer == False:
+            stateJSON['outputText'] = karlBadInput()
+        else:
+            stateJSON['inventory'][answer] = 1 
+            stateJSON['outputText'] = "Great work! You receive " + answer + "."
+
+    elif command[0] == "leave" and stateJSON['currentLocation'] == 'courtyard':
         print("leave")
-        stateJSON['outputText'] = "Leave command"
+        stateJSON['currentLocation'] = "leaveend"
+        stateJSON['outputText'] = "Within minutes, the perils of the swamp are far behind you. But what about the others? Do you even care? ×NOPE END."
+   
+    elif len(command) < 2:
+        stateJSON['outputText'] = karlBadInput()
+    
     else:
         print("interact")
-        stateJSON['outputText'] = "Interact command"
+        interact = newWorld.talk(command[0],command[1].lower(),stateJSON['currentLocation'])
+        if command[1].lower() == "candy bar" and command[0] == "get" and stateJSON['currentLocation'] == "austin208":
+            stateJSON['currentLocation'] = "chocoend"
+            stateJSON['outputText'] = "You snatch up the candy bar and DEVOUR it. Why would you do that? The five second rule is one thing… but the five-thousand year rule..? ×GASTRONOMIC END."
+        elif interact == False:
+            stateJSON['outputText'] = karlBadInput()
+        elif command[1].lower() == "dr gopal":
+            stateJSON['outputText'] = interact
+            stateJSON['inventory']["Gopal's Proof"] = 1 
+        else:
+            stateJSON['outputText'] = interact
+        
 
     return json.dumps(stateJSON)
+
+# Makes karl shout at idiots
+def karlBadInput():
+    insultArr = ['Guessing is a disease!','This is nonsense!!!','You didn’t even try!!']
+    return "A voice booms from across the swamp: " + insultArr[randrange(3)]
+
 
 # Sends user to game page with a "loading" username set 
 @app.route('/game/<userName>')

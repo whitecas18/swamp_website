@@ -1,6 +1,5 @@
 from location import location
 
-
 class maze(location):
 	def __init__(self, name, adjacent, closeness):
 		super().__init__(
@@ -12,7 +11,6 @@ class maze(location):
 
 def getCloseness(self):
 	return self.closeness
-
 
 def getAdjacentString(self):
 	adjString = "There are exits "

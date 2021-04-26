@@ -4,7 +4,6 @@ $(document).ready(function () {
   var audio = document.createElement("audio")
   var gameState = {
     inventory: {
-      "Chocolate Bar": 0,
       "Ronnie's Insight": 0,
       "Ding's Database": 0,
       "Hoggard's Syntax": 0,
@@ -24,7 +23,7 @@ $(document).ready(function () {
       "tainted, almost palatable in its stench. The windows are almost blocked by " +
       "overgrown vines and moss, and the sky has turned a permanent gray, the sun " +
       "nowhere in sight. It is as if all of the ECU campus had become a swamp. " +
-      "Humid, dark, and uninhabited.",
+      "Humid, dark, and uninhabited. ×NORTH is the exit door of the classroom.",
   }
 
   var typing = false
@@ -81,7 +80,7 @@ $(document).ready(function () {
     maze7: "togarbage1",
     maze8: "togarbage3",
     maze9: "togarbage3",
-    maze10: "togarbage2",
+    maze10: "togarbage3",
     maze11: "togarbage4",
     maze12: "togarbage5",
     ronnie: "shrine",
@@ -101,7 +100,7 @@ $(document).ready(function () {
     console.log(gameState)
     textBuilder(gameState.outputText)
     setBackground()
-    audio.volume = 0.2
+    audio.volume = 0.4
     console.log(audio.getAttribute("src"))
   }
 
@@ -240,7 +239,9 @@ $(document).ready(function () {
       await sleepNow(10)
 
       // HTML trims off the spaces, so we need to add them back in like so.
-      if (i != 0 && text.charAt(i - 1) == " ") {
+      if (text.charAt(i) == "×") {
+        $("#output").find("span").last().append("<br><br>")
+      } else if (i != 0 && text.charAt(i - 1) == " ") {
         $("#output")
           .find("span")
           .last()
