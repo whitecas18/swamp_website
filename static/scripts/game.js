@@ -1,7 +1,7 @@
 $(document).ready(function () {
   var input = document.getElementById("cmd")
   var output = document.getElementById("output")
-  var audio = document.getElementById("audio")
+  var audio = document.createElement("audio")
   var gameState = {
     inventory: {
       "Chocolate Bar": 0,
