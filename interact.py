@@ -17,3 +17,6 @@ class interact:
 
 	def getObj(self):
 		return self.obj
+
+	def getAnswerText(self):
+		return "You receive " + self.obj + "."

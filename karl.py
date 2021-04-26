@@ -26,4 +26,6 @@ class karl:
 		return self.questions[gemNum]
 
 	def isAnswerCorrect(self, gemNum, answer):
-		if answer == self.answers[gemNum]
+		if answer == self.answers[gemNum]:
+			return True
+		return False

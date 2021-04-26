@@ -243,7 +243,53 @@ class world:
 		else:
 			return False
 
-	def interact(self, verb, object, currentLoc):
+	def answer(self, currentLoc, answer):
+		if currentLoc == "ronnie":
+			if answer.lower() == "n*(n-1)":
+				return "Ronnie’s Insight"
+		elif currentLoc == "wu":
+			if answer.lower() == "none":
+				return "Wu’s Library"
+		elif currentLoc == "hills":
+			if answer.lower() == "low power consumption":
+				return "Hills’ API"
+		elif currentLoc == "hoggard":
+			if answer.lower() == "imap":
+				return "Hoggard’s Syntax"
+		elif currentLoc == "ding":
+			if answer.lower() == "project":
+				return "Ding’s Database"
+
+		return "Incorrect."
+
+
+
+
+	def talk(self, verb, obj, currentLoc):
 		loc = self.map[currentLoc]
 		if verb in loc.getInteract():
-			if loc.getInteract()[verb] == object:
+			if loc.getInteract()[verb] == obj:
+				if currentLoc == "ronnie":
+					if verb.lower() == "use":
+						return self.interactions[obj].getText()
+
+				elif verb.lower() == "talk":
+					return self.interactions[obj].getText()
+
+			return False
+
+		return False
+
+
+	def interact(self, command, currentLoc):
+		try:
+			comArr = command.split(" ". 1)
+			verb = comArr[0].lower()
+			obj = comArr[1]
+
+			if verb == "go":
+				return navigate*
+
+
+		except:
+			return False
